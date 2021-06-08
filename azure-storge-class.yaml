@@ -1,0 +1,22 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: azurefile-sc
+provisioner: kubernetes.io/azure-file
+mountOptions:
+  - dir_mode=0777
+  - file_mode=0777
+  - uid=0
+  - gid=0
+  - mfsymlinks
+  - cache=strict
+parameters:
+  skuName: Standard_LRS
+  location: eastus
+  storageAccount: <Azure Storage Account Name>
+  resourceGroup: <Azure Resource Group Name>
+  secretNamespace: "default"
+  secretName: azure-secret
+reclaimPolicy: Retain
+allowVolumeExpansion: true
+
